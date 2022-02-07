@@ -15,14 +15,60 @@ using System.Windows.Shapes;
 
 namespace SwordDamageUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        Random random = new Random();
+        SwordDamage swordDamage = new SwordDamage();
         public MainWindow()
         {
             InitializeComponent();
+            swordDamage.SetFlaming(false);
+            swordDamage.SetMagic(false);
+            RollDice();
+
+
+        }
+        //Helper methods
+        public void RollDice()
+        {
+            swordDamage.Roll = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+        }
+        void DisplayDamage()
+        {
+            damage.Text = $"Rolled {swordDamage.Roll} for {swordDamage.Damage} damage!";
+        }
+
+        //Event handlers
+        private void Flaming_Checked(object sender, RoutedEventArgs e)
+        {
+            swordDamage.SetFlaming(true);
+            DisplayDamage();
+        }
+
+        private void Flaming_Unchecked(object sender, RoutedEventArgs e)
+        {
+            swordDamage.SetFlaming(false);
+            DisplayDamage();
+
+        }
+
+        private void Magic_Checked(object sender, RoutedEventArgs e)
+        {
+            swordDamage.SetMagic(true);
+            DisplayDamage();
+        }
+
+        private void Magic_Unchecked(object sender, RoutedEventArgs e)
+        {
+            swordDamage.SetMagic(false);
+            DisplayDamage();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RollDice();
+
         }
     }
 }

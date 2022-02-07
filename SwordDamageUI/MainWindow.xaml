@@ -5,7 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SwordDamageUI"
         mc:Ignorable="d"
-        Title="Sword Damage" Height="450" Width="800">
+        Title="Sword Damage" Height="175" Width="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <CheckBox x:Name="flaming" Content="Flaming" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Flaming_Checked" Unchecked="Flaming_Unchecked"/>
+        <CheckBox x:Name="magic" Grid.Column="1" Content="Magic" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Magic_Checked" Unchecked="Magic_Unchecked"/>
+        <Button Content="Roll for damage" HorizontalAlignment="Center" Margin="20,10" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Click="Button_Click"/>
+        <TextBlock x:Name="damage" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Text="damage" VerticalAlignment="Center"/>
+
+
     </Grid>
 </Window>
