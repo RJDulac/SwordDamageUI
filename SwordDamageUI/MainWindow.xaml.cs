@@ -13,26 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace SwordDamageUI
 {
     public partial class MainWindow : Window
     {
-        Random random = new Random();
-        SwordDamage swordDamage = new SwordDamage();
+        static Random random = new Random();
+        SwordDamage swordDamage;
         public MainWindow()
         {
             InitializeComponent();
-            swordDamage.SetFlaming(false);
-            swordDamage.SetMagic(false);
-            RollDice();
-
-
+            swordDamage = new SwordDamage(Roll3d6Dice());
+            DisplayDamage();
         }
         //Helper methods
         public void RollDice()
         {
-            swordDamage.Roll = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+           swordDamage.Roll = Roll3d6Dice();
+            DisplayDamage();
         }
+        private static int Roll3d6Dice() => random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+    
         void DisplayDamage()
         {
             damage.Text = $"Rolled {swordDamage.Roll} for {swordDamage.Damage} damage!";
@@ -41,26 +42,26 @@ namespace SwordDamageUI
         //Event handlers
         private void Flaming_Checked(object sender, RoutedEventArgs e)
         {
-            swordDamage.SetFlaming(true);
+            swordDamage.Flaming = true;
             DisplayDamage();
         }
 
         private void Flaming_Unchecked(object sender, RoutedEventArgs e)
         {
-            swordDamage.SetFlaming(false);
+            swordDamage.Flaming = false;
             DisplayDamage();
 
         }
 
         private void Magic_Checked(object sender, RoutedEventArgs e)
         {
-            swordDamage.SetMagic(true);
+            swordDamage.Magic = true;
             DisplayDamage();
         }
 
         private void Magic_Unchecked(object sender, RoutedEventArgs e)
         {
-            swordDamage.SetMagic(false);
+            swordDamage.Magic = false;
             DisplayDamage();
 
         }
@@ -68,7 +69,6 @@ namespace SwordDamageUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             RollDice();
-
         }
     }
 }
